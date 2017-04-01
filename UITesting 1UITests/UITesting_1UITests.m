@@ -2,7 +2,7 @@
 //  UITesting_1UITests.m
 //  UITesting 1UITests
 //
-//  Created by Adi Boddapati on 31/03/17.
+//  Created by Ankit Bharti on 31/03/17.
 //  Copyright © 2017 KaHa. All rights reserved.
 //
 
