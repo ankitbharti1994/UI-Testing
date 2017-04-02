@@ -50,6 +50,10 @@
     XCTAssertTrue([app.navigationBars.element.identifier isEqualToString:@"Menu"],@"navigation title should be Details");
 }
 
+/*!
+    @brief  use this method to check for switch on and off and pushing the view controller after tapping on buttons
+ */
+
 -(void)testAppForNavigation {
     
     XCUIApplication *app = [[XCUIApplication alloc] init];
@@ -63,6 +67,10 @@
     XCTAssertTrue(isTrue,@"navigation title should be Menu");
 }
 
+/*!
+    @brief  Use this method to check for selection on tableview row
+ */
+
 -(void)testOnTableView {
     XCUIApplication *app=[[XCUIApplication alloc] init];
     [app.tables.cells.staticTexts[@"ankit"] tap];
@@ -73,6 +81,28 @@
         [app.buttons[@"Go To Previous"] tap];
         XCTAssertTrue([app.navigationBars.element.identifier isEqualToString:@"Menu"],@"Navigation title should be Details");
     }
+}
+
+/*!
+    @brief  Use this method to check the number of items in tableview
+ */
+
+-(void)testForTableViewItems {
+    XCUIApplication *app=[[XCUIApplication alloc] init];
+    XCTAssertEqual(app.tables.cells.count, 7,@"count should be 7");
+}
+
+/*!
+    @brief Use this method to check the counting of items for cell after delete one item from the list
+ */
+
+-(void)testTableViewAfterDeleteAnItem {
+    XCUIApplication *app=[[XCUIApplication alloc] init];
+    [app.tables.staticTexts[@"garima"] swipeLeft];
+    NSInteger beforeDelete=[app.tables.cells count];
+    [app.tables.cells.buttons[@"Delete"] tap];
+    NSInteger afterDelete=app.tables.cells.count;
+    XCTAssertNotEqual(beforeDelete, afterDelete,@"item count should be less by one");
 }
 
 @end

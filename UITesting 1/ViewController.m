@@ -10,7 +10,7 @@
 
 @interface ViewController ()
 {
-    NSArray *titleArray;
+    NSMutableArray *titleArray;
 }
 @end
 
@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    titleArray=@[@"ankit",@"rohit",@"garima",@"sumit",@"kailash",@"aakriti",@"nitish"];
+    titleArray=[@[@"ankit",@"rohit",@"garima",@"sumit",@"kailash",@"aakriti",@"nitish"] mutableCopy];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -68,6 +68,18 @@
         if (isSwitchOn) {
             [self performSegueWithIdentifier:@"goDetailedView" sender:nil];
         }
+    }
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle==UITableViewCellEditingStyleDelete) {
+        [titleArray removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        NSLog(@"Remaining items %@",titleArray);
     }
 }
 
