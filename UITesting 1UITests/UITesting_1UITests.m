@@ -63,4 +63,16 @@
     XCTAssertTrue(isTrue,@"navigation title should be Menu");
 }
 
+-(void)testOnTableView {
+    XCUIApplication *app=[[XCUIApplication alloc] init];
+    [app.tables.cells.staticTexts[@"ankit"] tap];
+    NSString *navigationTitle=app.navigationBars.element.identifier;
+    BOOL isTrue=[navigationTitle isEqualToString:@"Details"];
+    XCTAssertTrue(isTrue,@"naviagation title should be Menu");
+    if (isTrue) {
+        [app.buttons[@"Go To Previous"] tap];
+        XCTAssertTrue([app.navigationBars.element.identifier isEqualToString:@"Menu"],@"Navigation title should be Details");
+    }
+}
+
 @end

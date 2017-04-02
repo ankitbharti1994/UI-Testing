@@ -9,7 +9,9 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
+{
+    NSArray *titleArray;
+}
 @end
 
 @implementation ViewController
@@ -17,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    titleArray=@[@"ankit",@"rohit",@"garima",@"sumit",@"kailash",@"aakriti",@"nitish"];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -39,4 +42,33 @@
         [self performSegueWithIdentifier:@"goDetailedView" sender:sender];
     }
 }
+
+#pragma mark <UITableViewDataSource> method
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return titleArray.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    cell.textLabel.text=[NSString stringWithFormat:@"%@",[titleArray objectAtIndex:indexPath.row]];
+    return cell;
+}
+
+#pragma mark <UITableViewDelegate> method
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([[titleArray objectAtIndex:indexPath.row] isEqualToString:@"rohit"]) {
+        
+    }else {
+        if (isSwitchOn) {
+            [self performSegueWithIdentifier:@"goDetailedView" sender:nil];
+        }
+    }
+}
+
 @end
