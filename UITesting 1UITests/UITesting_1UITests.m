@@ -47,7 +47,7 @@
     XCUIApplication *app = [[XCUIApplication alloc] init];
     [app.switches[@"1"] tap];
     [app.buttons[@"Go To Details Page"] tap];
-    XCTAssertTrue(app.navigationBars.element.identifier,@"Details");
+    XCTAssertTrue([app.navigationBars.element.identifier isEqualToString:@"Menu"],@"navigation title should be Details");
 }
 
 -(void)testAppForNavigation {
